@@ -40,24 +40,28 @@ export class LoginComponent implements OnInit {
   login() {
 
       const val = this.form.value;
-
       this.auth.login(val.email, val.password)
-          .pipe(
-              tap(user => {
+      .pipe(
+          tap(user => {
 
-                  console.log(user);
+              console.log(user);
 
-                  this.store.dispatch(login({user}));
+              this.store.dispatch(login({user}));
+              //dispatch take ste ngrx action 
+              //actionis s plain javascript object 
+            //   action has a  type which is a string /
 
-                  this.router.navigateByUrl('/courses');
 
-              })
-          )
-          .subscribe(
-              noop,
-              () => alert('Login Failed')
-          );
+              this.router.navigateByUrl('/courses');
 
+          })
+      )
+      .subscribe(
+          noop,
+          () => alert('Login Failed')
+      );
+
+     
 
 
   }
